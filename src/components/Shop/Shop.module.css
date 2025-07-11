@@ -1,0 +1,236 @@
+.shopcontainer {
+    margin: 0 50px !important;
+}
+
+.filterscontainer {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px 24px;
+}
+
+.pricerangelabel {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.productimg {
+    border-radius: 15px;
+    height: 300px !important;
+    width: 100%;
+}
+
+.paginatebtn {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.numbtn {
+    border: 0;
+    background: transparent;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.activenumbtn {
+    border: 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+}
+
+.ratingtext {
+    font-size: 14px;
+}
+
+.sliderprice {
+    font-size: clamp(20px, 3vw, 24px);
+    color: #000;
+}
+
+.slideroldprice {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: clamp(20px, 3vw, 24px);
+    text-decoration: line-through;
+}
+
+.sliderdiscountbg {
+    background-color: rgba(255, 51, 51, 0.1);
+    border-radius: 43px;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+}
+
+.sliderdiscounttext {
+    font-size: 12px;
+    color: #FF3333;
+    font-weight: 100;
+}
+
+/* color-picker */
+.color-picker {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.color-picker input[type="radio"] {
+    display: none;
+}
+
+.color-picker label {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    /* Required for the tick mark */
+}
+
+.color-picker label::after {
+    content: '';
+    width: 8px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.color-picker input[type="radio"]:checked+label::after {
+    display: block;
+}
+
+.sizebtncontainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.sizebtn {
+    border: 0;
+    border-radius: 25px;
+    padding: 10px 20px !important;
+    background-color: #F0F0F0 !important;
+    font-size: 14px;
+}
+
+.activesizebtn {
+    background-color: #000 !important;
+    color: #fff !important;
+    font-size: 14px;
+    border: 0;
+    border-radius: 25px;
+    padding: 10px 20px !important;
+}
+
+.applyfilterbtn {
+    padding: 10px;
+    border: 0;
+    background-color: #000;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.filtermenuiconbg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #F0F0F0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.filtermenu {
+    border-radius: 15px 15px 0px 0;
+}
+
+@media(max-width:1024px) {
+    .color-picker {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .filterscontainer {
+        padding: 20px 10px;
+    }
+}
+
+@media(max-width:768px) {
+    .shopcontainer {
+        margin: 10px !important;
+    }
+
+    .productimg {
+        height: 200px !important;
+    }
+}
+
+@media(max-width:600px) {
+    .shopcontainer {
+        margin: 10px !important;
+    }
+
+    .productimg {
+        height: 200px !important;
+    }
+
+    .sizebtncontainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px
+    }
+
+    .color-picker {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width:375px) {
+    .sizebtncontainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px
+    }
+
+    .color-picker {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .prodresults {
+        width: 100% !important;
+    }
+
+    .paginatebtn svg {
+        width: 15px;
+    }
+
+    .paginatebtn {
+        padding: 5px;
+    }
+
+    .numbtn {
+        padding: 5px;
+        margin-right: 5px;
+    }
+}

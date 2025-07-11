@@ -1,0 +1,9 @@
+.productcontainer {
+    margin: 0 50px !important;
+}
+
+@media(max-width:600px) {
+    .productcontainer {
+        margin: 0 10px !important;
+    }
+}
