@@ -12,6 +12,7 @@ import Image from 'react-bootstrap/Image'
 import Form from 'react-bootstrap/Form'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { ProductContext } from '../../context/ProductContext';
+import { ProductMoreContext } from '../../context/ProductMoreContext';
 
 
 const Shop = () => {
@@ -71,12 +72,16 @@ const Shop = () => {
 
     console.log(resultPageNum);
 
+    const { productMore, setProductMore } = useContext(ProductMoreContext)
+
     const fetchData = async () => {
         try {
             const response = await fetch(`https://fakestoreapiserver.reactbd.org/api/products?page=${resultPageNum}&perPage=9`)
             const data = await response.json()
             console.log(data)
             setProducts(data.data)
+            setProductMore(data.data)
+            localStorage.setItem('productMore', JSON.stringify(data.data));
         } catch (error) {
             console.error('Error:', error)
         }
@@ -87,6 +92,8 @@ const Shop = () => {
     }, [resultPageNum])
 
     console.log(products);
+
+    console.log(productMore);
 
     const colorVariations = [
         {
@@ -198,6 +205,7 @@ const Shop = () => {
     const handleShow = () => setShow(true);
 
     const { productID, setProductID } = useContext(ProductContext)
+
 
     console.log(productID);
 
@@ -343,7 +351,7 @@ const Shop = () => {
                         </div>
                         <Row className='border-bottom border-tertiary pb-4'>
                             {products.map((item, index) =>
-                                <Col lg={4} md={6} xs={6} key={index} className={shopStyles.prodresults} onClick={() => setProductID(item._id)}>
+                                <Col lg={4} md={6} xs={6} key={index} className={shopStyles.prodresults} onClick={() => { setProductID(item._id); localStorage.setItem('productID', item._id) }}>
                                     <Link to='/shop/product' className='text-decoration-none'>
                                         <Card className='border-0'>
                                             <Card.Body className='p-0'>

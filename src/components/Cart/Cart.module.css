@@ -1,0 +1,27 @@
+.cartcontainer {
+    margin: 0 50px !important;
+}
+
+.shopbtn {
+    background-color: #000;
+    color: #fff;
+    border-radius: 25px;
+    padding: 8px 24px;
+    border: 0;
+}
+
+.emptycartcontainer {
+    height: 400px;
+}
+
+.carttitle {
+    font-size: clamp(30px, 3vw, 40px);
+    color: #000;
+    letter-spacing: -2px;
+}
+
+@media(max-width:600px) {
+    .cartcontainer {
+        margin: 0 10px !important;
+    }
+}

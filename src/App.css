@@ -179,3 +179,27 @@ body {
   box-shadow: none;
   color: rgba(0, 0, 0, 0.8);
 }
+
+#product-details-tabs .nav-item .nav-link {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+#product-details-tabs .nav-item .nav-link.active {
+  border: 0;
+  border-bottom: 2px solid #000;
+  color: #000;
+  font-weight: 600;
+}
+
+#product-faq .accordion-item button:focus {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+#product-faq .accordion-item button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.8);
+}
