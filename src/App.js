@@ -19,6 +19,7 @@ import Cart from './components/Cart/Cart';
 import { EmptyCartContext } from './context/EmptyCartContext';
 import { ProductDetailContext } from './context/ProductDetailContext'
 import { CartProvider } from './context/CartContext';
+import { ProductSpecsContext } from './context/ProductSpecsContext';
 
 
 function App() {
@@ -40,6 +41,10 @@ function App() {
 
   const [productDetail, setProductDetail] = useState([])
 
+  const [productSpecs, setProductSpecs] = useState([{ quantity: '', color: '', size: '' }])
+
+  console.log(productSpecs)
+
   return (
     <div className="App">
       <ProductContext.Provider value={{ productID, setProductID }}>
@@ -47,48 +52,50 @@ function App() {
           <EmptyCartContext.Provider value={{ emptyCart, setEmptyCart }}>
             <ProductDetailContext.Provider value={{ productDetail, setProductDetail }}>
               <CartProvider>
-                <Router>
-                  <Routes>
-                    <Route path='/'
-                      element={<div>
-                        <TopNav />
-                        <Hero />
-                        <NewArrival />
-                        <TopSelling />
-                        <DressStyle />
-                        <HappyCustomer />
-                        <LatestOffer />
-                        <Footer />
-                      </div>}>
-                    </Route>
-                    <Route path='/shop'
-                      element={<div>
-                        <TopNav />
-                        <Shop />
-                        <LatestOffer />
-                        <Footer />
-                      </div>}>
-                    </Route>
-                    <Route path='/shop/product'
-                      element={<div>
-                        <TopNav />
-                        <Product productID={productID} />
-                        <ProductDetail />
-                        <ProductMore productMore={productMore} />
-                        <LatestOffer />
-                        <Footer />
-                      </div>}>
-                    </Route>
-                    <Route path='/cart'
-                      element={<div>
-                        <TopNav />
-                        <Cart emptyCart={emptyCart} productDetail={productDetail} />
-                        <LatestOffer />
-                        <Footer />
-                      </div>}>
-                    </Route>
-                  </Routes>
-                </Router>
+                <ProductSpecsContext.Provider value={{ productSpecs, setProductSpecs }}>
+                  <Router>
+                    <Routes>
+                      <Route path='/'
+                        element={<div>
+                          <TopNav />
+                          <Hero />
+                          <NewArrival />
+                          <TopSelling />
+                          <DressStyle />
+                          <HappyCustomer />
+                          <LatestOffer />
+                          <Footer />
+                        </div>}>
+                      </Route>
+                      <Route path='/shop'
+                        element={<div>
+                          <TopNav />
+                          <Shop />
+                          <LatestOffer />
+                          <Footer />
+                        </div>}>
+                      </Route>
+                      <Route path='/shop/product'
+                        element={<div>
+                          <TopNav />
+                          <Product productID={productID} />
+                          <ProductDetail />
+                          <ProductMore productMore={productMore} />
+                          <LatestOffer />
+                          <Footer />
+                        </div>}>
+                      </Route>
+                      <Route path='/cart'
+                        element={<div>
+                          <TopNav />
+                          <Cart emptyCart={emptyCart} productDetail={productDetail} productSpecs={productSpecs} />
+                          <LatestOffer />
+                          <Footer />
+                        </div>}>
+                      </Route>
+                    </Routes>
+                  </Router>
+                </ProductSpecsContext.Provider>
               </CartProvider>
             </ProductDetailContext.Provider>
           </EmptyCartContext.Provider>

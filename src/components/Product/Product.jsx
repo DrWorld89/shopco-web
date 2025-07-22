@@ -8,6 +8,7 @@ import Image from 'react-bootstrap/Image';
 import { EmptyCartContext } from '../../context/EmptyCartContext';
 import { ProductDetailContext } from '../../context/ProductDetailContext';
 import { CartContext } from '../../context/CartContext'
+import { ProductSpecsContext } from '../../context/ProductSpecsContext'
 
 
 const Product = ({ productID }) => {
@@ -146,6 +147,18 @@ const Product = ({ productID }) => {
 
     console.log(emptyCart);
 
+    const { productSpecs, setProductSpecs } = useContext(ProductSpecsContext)
+
+    console.log(productSpecs)
+
+    const updatedProduct = {
+        ...result,
+        colorOptions: colorVariations,
+        sizeOptions: sizeVariations
+    };
+
+    console.log(updatedProduct)
+
     return (
         <section className={productStyles.productcontainer}>
             <Container fluid className='py-lg-5 py-3'>
@@ -208,7 +221,7 @@ const Product = ({ productID }) => {
                             <p className={productStyles.productdesctext}>Select Colors</p>
                             <div class={productStyles['color-picker']}>
                                 {colorVariations.map((item, index) => <div key={index}>
-                                    <input type="radio" id={item.color} name="color" value={item.color} />
+                                    <input type="radio" id={item.color} name="color" value={item.color} onChange={() => setProductSpecs((prevSpec) => [...prevSpec, { color: item.colorName }])} />
                                     <label for={item.color} style={{ backgroundColor: item.color, border: '1px solid rgba(0,0,0,0.2)' }}></label>
                                 </div>)}
                             </div>
@@ -217,30 +230,30 @@ const Product = ({ productID }) => {
                             <p className={productStyles.productdesctext}>Choose Size</p>
                             <div className={productStyles.sizebtncontainer}>
                                 {sizeVariations.map((item, index) => <div key={index}>
-                                    <button className={sizebtn === index ? productStyles.activesizebtn : productStyles.sizebtn} onClick={() => setSizeBtn(index)}>{item.size}</button>
+                                    <button className={sizebtn === index ? productStyles.activesizebtn : productStyles.sizebtn} onClick={() => { setSizeBtn(index); setProductSpecs((prevSpec) => [...prevSpec, { size: item.size }]) }}>{item.size}</button>
                                 </div>)}
                             </div>
                         </div>
                         <div className='py-4 d-flex'>
                             <div className='me-3'>
                                 <button className={productStyles.qtybtn}>
-                                    <svg onClick={() => setProductQty(productQty > 1 ? productQty - 1 : productQty)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg onClick={() => { setProductQty(productQty > 1 ? productQty - 1 : productQty); setProductSpecs((prevSpec) => [...prevSpec, { quantity: productQty }]) }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21.375 12C21.375 12.2984 21.2565 12.5845 21.0455 12.7955C20.8345 13.0065 20.5484 13.125 20.25 13.125H3.75C3.45163 13.125 3.16548 13.0065 2.9545 12.7955C2.74353 12.5845 2.625 12.2984 2.625 12C2.625 11.7016 2.74353 11.4155 2.9545 11.2045C3.16548 10.9935 3.45163 10.875 3.75 10.875H20.25C20.5484 10.875 20.8345 10.9935 21.0455 11.2045C21.2565 11.4155 21.375 11.7016 21.375 12Z" fill="black" />
                                     </svg>
                                     <span>{productQty}</span>
-                                    <svg onClick={() => setProductQty(productQty + 1)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg onClick={() => { setProductQty(productQty + 1); setProductSpecs((prevSpec) => [...prevSpec, { quantity: productQty }]) }} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21.375 12C21.375 12.2984 21.2565 12.5845 21.0455 12.7955C20.8345 13.0065 20.5484 13.125 20.25 13.125H13.125V20.25C13.125 20.5484 13.0065 20.8345 12.7955 21.0455C12.5845 21.2565 12.2984 21.375 12 21.375C11.7016 21.375 11.4155 21.2565 11.2045 21.0455C10.9935 20.8345 10.875 20.5484 10.875 20.25V13.125H3.75C3.45163 13.125 3.16548 13.0065 2.9545 12.7955C2.74353 12.5845 2.625 12.2984 2.625 12C2.625 11.7016 2.74353 11.4155 2.9545 11.2045C3.16548 10.9935 3.45163 10.875 3.75 10.875H10.875V3.75C10.875 3.45163 10.9935 3.16548 11.2045 2.9545C11.4155 2.74353 11.7016 2.625 12 2.625C12.2984 2.625 12.5845 2.74353 12.7955 2.9545C13.0065 3.16548 13.125 3.45163 13.125 3.75V10.875H20.25C20.5484 10.875 20.8345 10.9935 21.0455 11.2045C21.2565 11.4155 21.375 11.7016 21.375 12Z" fill="black" />
                                     </svg>
                                 </button>
                             </div>
                             <div>
-                                <button className={productStyles.addtocartbtn} onClick={() => {setEmptyCart(false); addToCart(productDetail)}}>Add to Cart</button>
+                                <button className={productStyles.addtocartbtn} onClick={() => { setEmptyCart(false); addToCart(productDetail) }}>Add to Cart</button>
                             </div>
                         </div>
                     </Col>
                 </Row>
             </Container>
-        </section>
+        </section >
     )
 }
 

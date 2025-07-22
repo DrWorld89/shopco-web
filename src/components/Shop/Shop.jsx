@@ -13,7 +13,7 @@ import Form from 'react-bootstrap/Form'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { ProductContext } from '../../context/ProductContext';
 import { ProductMoreContext } from '../../context/ProductMoreContext';
-
+import Spinner from 'react-bootstrap/Spinner'
 
 const Shop = () => {
 
@@ -82,6 +82,7 @@ const Shop = () => {
             setProducts(data.data)
             setProductMore(data.data)
             localStorage.setItem('productMore', JSON.stringify(data.data));
+            setLoading(false);
         } catch (error) {
             console.error('Error:', error)
         }
@@ -209,6 +210,7 @@ const Shop = () => {
 
     console.log(productID);
 
+    const [loading, setLoading] = useState(true)
 
     return (
         <section className={shopStyles.shopcontainer}>
@@ -350,7 +352,8 @@ const Shop = () => {
                             </div>
                         </div>
                         <Row className='border-bottom border-tertiary pb-4'>
-                            {products.map((item, index) =>
+                            {loading && <div className='text-center'> <Spinner animation="grow" /></div>}
+                            {!loading && products.map((item, index) =>
                                 <Col lg={4} md={6} xs={6} key={index} className={shopStyles.prodresults} onClick={() => { setProductID(item._id); localStorage.setItem('productID', item._id) }}>
                                     <Link to='/shop/product' className='text-decoration-none'>
                                         <Card className='border-0'>

@@ -9,7 +9,7 @@ import { CartContext } from '../../context/CartContext'
 import { EmptyCartContext } from '../../context/EmptyCartContext';
 
 
-const Cart = ({ productDetail }) => {
+const Cart = ({ emptyCart, productDetail, productSpecs }) => {
 
     const location = useLocation();
     const pathSegments = location.pathname.split('/').filter(Boolean);
@@ -35,19 +35,27 @@ const Cart = ({ productDetail }) => {
 
     console.log(productDetail);
 
-    const { cart, removeFromCart, clearCart } = useContext(CartContext)
+    const { cart, updateQuantity, removeFromCart, clearCart } = useContext(CartContext)
 
     console.log(cart);
 
     const totalCost = cart.reduce((acc, product) => acc + (product.discountedPrice * product.quantity), 0);
 
-    const { emptyCart, setEmptyCart } = useContext(EmptyCartContext)
+    const { setEmptyCart } = useContext(EmptyCartContext)
+
+    console.log(emptyCart)
+
+    console.log(cart.length)
+
+    const showEmptyCart = () => {
+        cart.length === 0 ? setEmptyCart(true) : setEmptyCart(false)
+    }
 
     return (
         <section className={cartStyles.cartcontainer}>
             <Container fluid className='py-4'>
                 <Row>
-                    {emptyCart && cart.length < 0 ?
+                    {emptyCart && cart.length === 0 &&
                         <Col lg={12}>
                             <div className={`${cartStyles.emptycartcontainer} text-center position relative`}>
                                 <div className='position-absolute top-50 start-50 translate-middle'>
@@ -59,7 +67,7 @@ const Cart = ({ productDetail }) => {
                                 </div>
                             </div>
                         </Col>
-                        : ""}
+                    }
                     {cart && cart.length > 0 ?
                         <Col lg={12} className='border-top border-tertiary py-lg-4 py-3'>
                             <nav aria-label="breadcrumb">
@@ -85,12 +93,20 @@ const Cart = ({ productDetail }) => {
                             <div>
                                 <h2>Cart</h2>
                                 {cart.map((product) => (
-                                    <div key={product.id}>
+                                    <div key={product._id}>
                                         <p>{product.title} - ${product.discountedPrice} x {product.quantity}</p>
-                                        <button onClick={() => { removeFromCart(product._id); cart.length < 0 ? setEmptyCart(true) : setEmptyCart(false) }}>Remove</button>
+                                        <button onClick={() => updateQuantity(product._id, product.quantity + 1)}>
+                                            +
+                                        </button>
+                                        {product.quantity}
+                                        <button onClick={() => updateQuantity(product._id, product.quantity - 1)}>
+                                            -
+                                        </button>
+                                        <button onClick={() => { removeFromCart(product._id); showEmptyCart() }}>Remove</button>
+                                        {productSpecs.map((item, index) => <div key={index}>{item.quantity}{item.color}{item.size}</div>)}
                                     </div>
                                 ))}
-                                <p>Total: ${totalCost}</p>
+                                <p>Total: ${Math.round(totalCost)}</p>
                                 <button onClick={() => { clearCart(); setEmptyCart(true) }}>Clear Cart</button>
                             </div>
                         </Col>
