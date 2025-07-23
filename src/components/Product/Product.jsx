@@ -9,7 +9,7 @@ import { EmptyCartContext } from '../../context/EmptyCartContext';
 import { ProductDetailContext } from '../../context/ProductDetailContext';
 import { CartContext } from '../../context/CartContext'
 import { ProductSpecsContext } from '../../context/ProductSpecsContext'
-
+import Spinner from 'react-bootstrap/Spinner'
 
 const Product = ({ productID }) => {
 
@@ -42,6 +42,8 @@ const Product = ({ productID }) => {
 
     const [result, setResult] = useState({})
 
+    const [loading, setLoading] = useState(true)
+
     console.log(productID);
 
     const { productDetail, setProductDetail } = useContext(ProductDetailContext)
@@ -63,6 +65,7 @@ const Product = ({ productID }) => {
                     setResult(data)
                     setProductDetail(data)
                     localStorage.setItem(`product-${productID}`, JSON.stringify(data));
+                    setLoading(false)
                 }
             }
         } catch (error) {
@@ -154,10 +157,12 @@ const Product = ({ productID }) => {
     const updatedProduct = {
         ...result,
         colorOptions: colorVariations,
-        sizeOptions: sizeVariations
+        sizeOptions: sizeVariations,
+        quantity: productQty,
     };
 
     console.log(updatedProduct)
+
 
     return (
         <section className={productStyles.productcontainer}>
@@ -178,7 +183,8 @@ const Product = ({ productID }) => {
                             </ol>
                         </nav>
                     </Col>
-                    <Col lg={6} md={6}>
+                    {loading && <div className='text-center'> <Spinner animation="grow" /></div>}
+                    {!loading && <Col lg={6} md={6}>
                         <div className='d-flex flex-lg-row flex-column'>
                             <div className={`${productStyles.prodthumbcon} d-flex flex-row flex-lg-column order-lg-1 order-2`}>
                                 {thumbImages.map((item, index) =>
@@ -192,7 +198,8 @@ const Product = ({ productID }) => {
                             </div>
                         </div>
                     </Col>
-                    <Col lg={6} md={6} className='ps-lg-4'>
+                    }
+                    {!loading && <Col lg={6} md={6} className='ps-lg-4'>
                         <div>
                             <h2 className={`${productStyles.producttitle} text-uppercase`}>{result.title}</h2>
                         </div>
@@ -251,6 +258,7 @@ const Product = ({ productID }) => {
                             </div>
                         </div>
                     </Col>
+                    }
                 </Row>
             </Container>
         </section >
