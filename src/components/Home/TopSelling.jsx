@@ -12,6 +12,7 @@ import topsellingimg2 from '../../assets/images/topsellingimg2.png'
 import topsellingimg3 from '../../assets/images/topsellingimg3.png'
 import topsellingimg4 from '../../assets/images/topsellingimg4.png'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 const TopSelling = () => {
 
@@ -211,7 +212,7 @@ const TopSelling = () => {
                             </Slider>
                         </div>
                         <div className='text-center py-5'>
-                            <Button variant="outline-dark" className={topsellingStyles.viewbtn}>View All</Button>
+                            <Link to='/shop' className='text-decoration-none'><Button variant="outline-dark" className={topsellingStyles.viewbtn}>View All</Button></Link>
                         </div>
                     </Col>
                 </Row>

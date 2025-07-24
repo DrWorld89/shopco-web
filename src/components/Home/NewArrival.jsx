@@ -12,6 +12,7 @@ import newarrivalimg2 from '../../assets/images/newarrivalimg2.png'
 import newarrivalimg3 from '../../assets/images/newarrivalimg3.png'
 import newarrivalimg4 from '../../assets/images/newarrivalimg4.png'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 const NewArrival = () => {
 
@@ -225,7 +226,7 @@ const NewArrival = () => {
                             </Slider>
                         </div>
                         <div className='text-center py-5'>
-                            <Button variant="outline-dark" className={newarrivalStyles.viewbtn}>View All</Button>
+                            <Link to='/shop' className='text-decoration-none'><Button variant="outline-dark" className={newarrivalStyles.viewbtn}>View All</Button></Link>
                         </div>
                         <svg width="1240" height="1" viewBox="0 0 1240 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <line x1="-4.37114e-08" y1="0.500122" x2="1240" y2="0.500014" stroke="black" stroke-opacity="0.1" />

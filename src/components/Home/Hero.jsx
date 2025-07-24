@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import heroStyles from './Hero.module.css'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 
 const Hero = () => {
@@ -14,7 +15,7 @@ const Hero = () => {
                         <div>
                             <h2 className={heroStyles.herotitle}>FIND CLOTHES THAT MATCHES YOUR STYLE</h2>
                             <p className='my-3'>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
-                            <Button variant="dark" className={`${heroStyles.herobtn} my-3`}>Shop Now</Button>
+                            <Button variant="dark" className={`${heroStyles.herobtn} my-3`}><Link to='/shop' className='text-decoration-none text-white'> Shop Now</Link></Button>
                         </div>
                         <div className='d-flex my-lg-5 my-3' id={heroStyles.herostats}>
                             <div className='border-end border-tertiary me-lg-4 pe-lg-4 me-md-3 pe-md-3 pe-3 me-3'>
