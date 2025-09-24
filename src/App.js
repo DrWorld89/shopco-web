@@ -20,7 +20,7 @@ import { EmptyCartContext } from './context/EmptyCartContext';
 import { ProductDetailContext } from './context/ProductDetailContext'
 import { CartProvider } from './context/CartContext';
 import { ProductSpecsContext } from './context/ProductSpecsContext';
-
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 
